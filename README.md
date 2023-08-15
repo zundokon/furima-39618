@@ -1,24 +1,62 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| nickname           | string | null: false               |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| kana_first         | string | null: false               |
+| kana_last          | string | null: false               |
+| birthdate          | date   | null: false               |
 
-* Ruby version
+### Association
+- has_many :items dependent: :destroy
+- has_many :orders
 
-* System dependencies
+## items テーブル
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| image              | string  | null: false               |
+| name               | string  | null: false               |
+| description        | string  | null: false               |
+| category           | integer | null: false               |
+| condition          | integer | null: false               |
+| shipping_fee       | integer | null: false               |
+| shipping_region    | integer | null: false               |
+| shipping_duration  | integer | null: false               |
+| price              | integer | null: false               |
 
-* Configuration
+### Association
+- belongs_to :user
+- belongs_to :order
 
-* Database creation
+## orders テーブル
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| credit_card_number | integer | null: false               |
+| expiration_date    | integer | null: false               |
+| security_code      | string  | null: false               |
 
-* Database initialization
+### Association
+- belongs_to :user
+- has_one :shipping_address
 
-* How to run the test suite
+## shipping_addresses テーブル
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| postal_code        | string  | null: false               |
+| prefecture         | integer | null: false               |
+| city               | string  | null: false               |
+| street_address     | string  | null: false               |
+| building_name      | string  |                           |
+| phone_number       | string  | null: false               |
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+### Association
+- has_many :items
+- has_one :order
 
-* ...
