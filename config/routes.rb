@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "items#index"
 
-  <%# 出品機能 %>
-  resources :items
-  <%# //出品機能 %>
+  # 出品機能
+  # resources :items
+  # 出品機能
 end
