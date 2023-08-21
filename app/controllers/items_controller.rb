@@ -6,9 +6,11 @@ class ItemsController < ApplicationController
 #   end
 #  詳細機能
 
-  def index
-    @items = Item.new
-  end
+# 一覧機能
+#   def index
+#     @items = Item.new
+#   end
+# 一覧機能
 
   def new
     @item = Item.new
