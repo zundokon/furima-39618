@@ -6,11 +6,10 @@ class ItemsController < ApplicationController
 #   end
 #  詳細機能
 
-# 一覧機能
-#   def index
-#     @items = Item.new
-#   end
-# 一覧機能
+  def index
+    @items = Item.all.order(created_at: :desc)
+  end
+
 
   def new
     @item = Item.new
