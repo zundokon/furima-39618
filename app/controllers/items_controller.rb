@@ -1,10 +1,12 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
 
-#  詳細機能
-#   def show
-#   end
-#  詳細機能
+
+  def show
+    @item = Item.find(params[:id])
+    @user = @item.user
+
+  end
 
   def index
     @items = Item.all.order(created_at: :desc)
