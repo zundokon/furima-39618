@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, ]
 
   def show
-    @item = Item.find(params[:id])
     @user = @item.user
 
   end
@@ -27,7 +26,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
     if @item.user_id == current_user.id 
     else
       redirect_to root_path
