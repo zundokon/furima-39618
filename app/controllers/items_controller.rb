@@ -3,11 +3,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def show
-    @user = @item.user
-    if !user_signed_in?
-      redirect_to new_user_session_path
-    end
-
+    return unless user_signed_in?
+    @order = @item.orders.find_by(user_id: current_user.id)
   end
 
   def index
