@@ -25,6 +25,17 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Postal code can't be blank")
       end
+      it 'postal_codeが半角ハイフンを含まなければ購入できないこと' do
+        @order_form.postal_code = '1234567'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Postal code 例）123-4567")
+      end
+      it 'postal_codeが全角だと購入できないこと' do
+        @order_form.postal_code = '１２３−４５６７'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Postal code 例）123-4567")
+      end
+
       it 'prefecture_idが「---」だと購入できないこと' do
         @order_form.prefecture_id = 1
         @order_form.valid?
