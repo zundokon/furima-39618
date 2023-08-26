@@ -3,8 +3,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def show
-    @user = @item.user
-
+    return unless user_signed_in?
+    @order = @item.orders.find_by(user_id: current_user.id)
   end
 
   def index
@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user_id == current_user.id 
+    if @item.user_id == current_user.id && @item.orders.nil?
     else
       redirect_to root_path
     end
