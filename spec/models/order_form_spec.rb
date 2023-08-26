@@ -66,6 +66,11 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
       end
+      it 'phone_numberが全角だと購入できないこと' do
+        @order_form.phone_number = '０９０−１２３４−５６７８'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
+      end
       it "tokenが空では登録できないこと" do
         @order_form.token = nil
         @order_form.valid?
