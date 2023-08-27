@@ -3,8 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def show
-    return unless user_signed_in?
-    @order = @item.orders.find_by(user_id: current_user.id)
+    @order = @item.order if user_signed_in? && @item.order.present? && @item.order.user == current_user
   end
 
   def index
